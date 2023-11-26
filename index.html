@@ -34,6 +34,7 @@
         border: 1px solid #ccc;
         padding: 5px 10px;
         margin-left: 20px;
+        min-width: 160px;
     }
     .result-hour,
     .form-group{
@@ -50,6 +51,10 @@
         display: flex;
         justify-content: center;
     }
+    #sum-money,
+    #sum-hour{
+        color: red;
+    }
 </style>
 <body>
     <div class="timekeeping">
@@ -59,17 +64,17 @@
                 <form id="form">
                     <div class="form-group start">
                         <label for="">Giờ đến:</label>
-                        <input type="text" id="hour-start" placeholder="Giờ" required="Không được để trông">
-                        <input type="text" id="minute-start" placeholder="Phút" required="Không được để trông">
+                        <input type="number" min="0" max="23" id="hour-start" placeholder="Giờ" required="Không được để trông">
+                        <input type="number" min="0" max="60" id="minute-start" placeholder="Phút" required="Không được để trông">
                     </div>
                     <div class="form-group">
                         <label for="">Giờ về:</label>
-                        <input type="text" id="hour-end" placeholder="Giờ" required="Không được để trông">
-                        <input type="text" id="minute-end" placeholder="Phút" required="Không được để trông">
+                        <input type="number" min="0" max="23" id="hour-end" placeholder="Giờ" required="Không được để trông">
+                        <input type="number" min="0" max="60" id="minute-end" placeholder="Phút" required="Không được để trông">
                     </div>
                     <div class="form-group">
                         <label for="">Mức lương trên giờ:</label>
-                        <input type="text" id="money" placeholder="Nhập số nguyên">
+                        <input type="number" id="money" placeholder="Nhập số nguyên">
                     </div>
                     <div class="form-group submit" >
                         <input type="submit" value="Tính toán">
