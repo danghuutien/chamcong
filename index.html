@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trần Thị Mỹ Uyên</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        outline: none;
+    }
+    .timekeeping{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+    }
+    .timekeeping .container{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .timekeeping-content{
+        max-width: 500px;
+        border: 1px solid #ccc;
+        padding: 30px 20px;
+    }
+    input{
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        margin-left: 20px;
+    }
+    .result-hour,
+    .form-group{
+        margin-bottom: 20px;
+    }
+    .title{
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    .submit{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<body>
+    <div class="timekeeping">
+        <div class="container">
+            <div class="title">Chấm công theo giờ trong một ngày</div>
+            <div class="timekeeping-content">
+                <form id="form">
+                    <div class="form-group start">
+                        <label for="">Giờ đến:</label>
+                        <input type="text" id="hour-start" placeholder="Giờ" required="Không được để trông">
+                        <input type="text" id="minute-start" placeholder="Phút" required="Không được để trông">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Giờ về:</label>
+                        <input type="text" id="hour-end" placeholder="Giờ" required="Không được để trông">
+                        <input type="text" id="minute-end" placeholder="Phút" required="Không được để trông">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Mức lương trên giờ:</label>
+                        <input type="text" id="money" placeholder="Nhập số nguyên">
+                    </div>
+                    <div class="form-group submit" >
+                        <input type="submit" value="Tính toán">
+                    </div>
+                </form>
+                <div class="result-hour">
+                    <span>Tổng giờ làm: </span>
+                    <span id="sum-hour"></span>
+                </div>
+                <div class="result-money">
+                    <span>Thành tiền: </span>
+                    <span id="sum-money"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('form').onsubmit = (e)=>{
+            e.preventDefault();
+            const hourStart = parseFloat(document.getElementById('hour-start').value) || 0;
+            const minuteStart = parseFloat(document.getElementById('minute-start').value) || 0;
+            const hourEnd = parseFloat(document.getElementById('hour-end').value) || 0;
+            const minuteEnd = parseFloat(document.getElementById('minute-end').value) || 0;
+            const money = parseFloat(document.getElementById('money').value) || 0;
+
+            const startTime = hourStart + minuteStart / 60;
+            const endTime = hourEnd + minuteEnd / 60;
+            const hoursWorked = endTime - startTime;
+            const hours = Math.floor(hoursWorked);
+            const minutes = Math.round((hoursWorked - hours) * 60);
+            document.getElementById('sum-hour').innerText = `${hours} giờ ${minutes} phút`
+            if(money != '' && money > 0){
+                document.getElementById('sum-money').innerText = 
+                `${(hoursWorked * money).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}`
+            }
+        }
+    </script>
+</body>
+</html>
